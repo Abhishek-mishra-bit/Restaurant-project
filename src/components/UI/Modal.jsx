@@ -1,9 +1,11 @@
-import classes from "./Modal.module.css";
+/* eslint-disable react/prop-types */
+import { Fragment } from "react";
 import ReactDOM from "react-dom";
-import React from "react";
+
+import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
-  return <div className="classes.backdrop"></div>;
+  return <div className={classes.backdrop} onClick={props.onClose} />;
 };
 
 const ModalOverlay = (props) => {
@@ -14,16 +16,20 @@ const ModalOverlay = (props) => {
   );
 };
 
-const poratalElement = document.getElementById("overlays");
+const portalElement = document.getElementById("overlays");
+
 const Modal = (props) => {
   return (
-    <React.Fragment>
-      {ReactDOM.createPortal(<Backdrop />, poratalElement)}
+    <Fragment>
+      {ReactDOM.createPortal(
+        <Backdrop onClose={props.onClose} />,
+        portalElement
+      )}
       {ReactDOM.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
-        poratalElement
+        portalElement
       )}
-    </React.Fragment>
+    </Fragment>
   );
 };
 
