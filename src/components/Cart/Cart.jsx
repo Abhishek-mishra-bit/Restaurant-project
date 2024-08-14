@@ -10,8 +10,17 @@ const Cart = (props) => {
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
-  const cartItemRemoveHandler = (id) => {};
-  const cartItemAddHandler = (item) => {};
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+
+    // props.history.push("/cart"); // Redirect to cart page after removing an item
+    // props.history.push("/cart"); // Redirect to cart page after removing an item
+  };
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem(item);
+
+    // props.history.push("/cart"); // Redirect to cart page after adding an item
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
