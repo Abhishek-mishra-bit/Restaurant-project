@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useReducer } from "react";
 
 import CartContext from "./cart-context";
@@ -11,10 +12,10 @@ const cartReducer = (state, action) => {
   if (action.type === "ADD") {
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
+
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
-
     const existingCartItem = state.items[existingCartItemIndex];
     let updatedItems;
 
@@ -28,6 +29,7 @@ const cartReducer = (state, action) => {
     } else {
       updatedItems = state.items.concat(action.item);
     }
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
@@ -53,6 +55,7 @@ const cartReducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+
   return defaultCartState;
 };
 
@@ -62,8 +65,8 @@ const CartProvider = (props) => {
     defaultCartState
   );
 
-  const addItemToCartHandler = (item, id) => {
-    dispatchCartAction({ type: "ADD", item: item, id: id });
+  const addItemToCartHandler = (item) => {
+    dispatchCartAction({ type: "ADD", item: item });
   };
 
   const removeItemFromCartHandler = (id) => {
